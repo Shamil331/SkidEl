@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using System.Linq;
 using Npgsql;
 namespace SkidEl.Controllers
 {
-    //[Route("api/[controller]")]
-    [Route("api/discounts")]
+    [Route("api/[controller]/[action]")]
+    //[Route("api/discounts")]
     [ApiController]
     public class DiscountsController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        private SkidElContext _context;
+        private SkidElContext? _context;
         //public DiscountsController(IConfiguration configuration)
         //{
         //    _configuration = configuration;
@@ -24,9 +24,25 @@ namespace SkidEl.Controllers
             _context=skidElContext;
         }
         [HttpGet]
+        [ActionName("GetAll")]
         public async Task<ActionResult<IEnumerable<Discount>>> Get()
         {
             return await _context.Discounts.ToListAsync();
+        }
+        [HttpGet("{DiscountId}")]
+        [ActionName("GetById")]
+        public async Task<ActionResult<Discount>> Get(int DiscountId)
+        {
+            Discount discount = await _context.Discounts.FirstOrDefaultAsync(x => x.Id == DiscountId);
+            if (discount == null)
+                return NotFound();
+            return new ObjectResult(discount);
+        }
+        [HttpGet("{DiscountSubcategory}")]
+        [ActionName("GetBySubcategory")]
+        public async Task<ActionResult<IEnumerable<Discount>>> Get(string DiscountSubcategory)
+        {
+            return await _context.Discounts.Where(x => x.Subcategory.Name == DiscountSubcategory).ToListAsync();
         }
         //GET: api/<DiscountsController>
         //[HttpGet]
