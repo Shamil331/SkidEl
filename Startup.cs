@@ -9,6 +9,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.Configuration;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
+using Microsoft.EntityFrameworkCore;
 
 namespace SkidEl
 {
@@ -24,7 +26,9 @@ namespace SkidEl
             {
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
-
+            services.AddDbContext<SkidElContext>();
+            services.AddControllers();
+            
             //JsonSerializer
             services.AddControllersWithViews().AddNewtonsoftJson(options=>
             options.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore)
@@ -38,14 +42,14 @@ namespace SkidEl
         {
 
             //Enable Cors
-            app.UseCors(options=>options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //app.UseCors(options=>options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
 
-            app.UseRouting();
-            app.UseAuthorization();
+            //app.UseRouting();
+            //app.UseAuthorization();
 
             //app.UseEndpoints(endpoints =>
             //{
@@ -54,9 +58,9 @@ namespace SkidEl
             //        await context.Response.WriteAsync("Hello World!");
             //    });
             //});
-            //app.UseDeveloperExceptionPage();
-            //app.UseRouting();
-            //app.UseDefaultFiles();
+            app.UseDeveloperExceptionPage();
+            app.UseRouting();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseEndpoints(endpoints =>
             {

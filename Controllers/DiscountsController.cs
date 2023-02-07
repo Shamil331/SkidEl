@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using Npgsql;
-
 namespace SkidEl.Controllers
 {
     //[Route("api/[controller]")]
@@ -15,9 +14,19 @@ namespace SkidEl.Controllers
     public class DiscountsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        public DiscountsController(IConfiguration configuration)
+        private SkidElContext _context;
+        //public DiscountsController(IConfiguration configuration)
+        //{
+        //    _configuration = configuration;
+        //}
+        public DiscountsController(SkidElContext skidElContext)
         {
-            _configuration = configuration;
+            _context=skidElContext;
+        }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Discount>>> Get()
+        {
+            return await _context.Discounts.ToListAsync();
         }
         //GET: api/<DiscountsController>
         //[HttpGet]
@@ -42,6 +51,6 @@ namespace SkidEl.Controllers
         //    return new JsonResult(table);
         //}
 
-        
+
     }
 }
