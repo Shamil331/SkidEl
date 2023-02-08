@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="~/css/InterParams.css"/>
+    <link rel="stylesheet" href="~/css/LayoutStyle.css"/>
+</head>
+<body>
+    <header>
+        <div class="Containers" style="gap:65px; padding: 5px 20px 5px 55px;background:#00EF0E; border-radius:35px">
+        <img src="~/images/Logo.svg" style="transform: rotate(-2deg); filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25)); order:0; margin-bottom: 2px"/>
+        <div style="display: flex; flex-direction: row; gap: 30px; order: 1">
+            <div class="Containers CategoriesContainers" style="order:0">
+                <img src="~/images/SmartphoneIcon.svg" style="margin-bottom: -8px"/>
+                <div class="CategoriesText">Смартфоны</div>
+            </div>
+            <div class="Containers CategoriesContainers" style="order:1">
+                <img src="~/images/LaptopIcon.svg" style="margin-bottom: -8px"/>
+                <div class="CategoriesText">Ноутбуки</div>
+            </div>
+            <div class="Containers CategoriesText" style="order:2">
+                <img src="~/images/TVIcon.svg" style="margin-bottom: -8px"/>
+                <div class="CategoriesText">Телевизоры</div>
+            </div>
+            <div class="Containers CategoriesText" style="order:3">
+                <img src="~/images/CatalogIcon.svg" style="margin-bottom: -8px"/>
+                <div class="CategoriesText">Каталог</div>
+            </div>
+        </div>
+        <div id="SearchField" style="order: 2">
+            <img src="~/images/SearchIcon.svg"/>
+            <input id="SearchTextArea" value="Поиск..."/>
+        </div>
+    </div>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+        <script src="~/lib/jquery-3.6.3.min.js"></script>
+        <script src="~/js/Layout.js"></script>
+        @*@await RenderSectionAsync("Scripts", required: false)*@
+</body>
+</html>

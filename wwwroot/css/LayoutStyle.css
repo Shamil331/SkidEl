@@ -1,0 +1,58 @@
+﻿
+.Containers {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: none;
+}
+
+.CategoriesContainers {
+    gap: 6px;
+}
+
+:root {
+    font-family: 'Inter', sans-serif;
+}
+
+.CategoriesText {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: white;
+    /* text-align: center; */
+    align-items: center;
+    display: flex;
+}
+
+#SearchField {
+    flex-direction: row;
+    padding: 0px 0px 0px 10px;
+    gap: 5px;
+    background: white;
+    border: 2px solid #808080;
+    box-shadow: inset 0px 4px 4px rgba(0,0,0,0.25);
+    border-radius: 25px;
+    width: 375px;
+    height: 46px;
+    align-items: center;
+    display: flex;
+}
+
+#SearchTextArea {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    color: #808080;
+    resize: none;
+    border-width: 0;
+    overflow-wrap: unset;
+}
+
+#SearchTextArea:focus-visible {
+    outline-width: 0px;
+}
+div:hover{
+    cursor:default;
+}

@@ -12,4 +12,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.17" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\SkidEl\" />
+  </ItemGroup>
+
 </Project>

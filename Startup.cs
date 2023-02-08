@@ -27,7 +27,7 @@ namespace SkidEl
             //    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             //});
             services.AddDbContext<SkidElContext>();
-            services.AddControllers();
+            services.AddControllersWithViews();
             
             //JsonSerializer
             //services.AddControllersWithViews().AddNewtonsoftJson(options=>
@@ -36,7 +36,7 @@ namespace SkidEl
             //    =new DefaultContractResolver());
             //services.AddControllers();
         }
-        
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -62,9 +62,15 @@ namespace SkidEl
             app.UseRouting();
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers(); // Маршрутизация на конотроллеры
+            //});
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers(); // Маршрутизация на конотроллеры
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}");
             });
         }
     }
