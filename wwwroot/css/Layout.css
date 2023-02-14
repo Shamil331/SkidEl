@@ -1,12 +1,16 @@
-﻿
-.Containers {
+﻿.Containers {
     display: flex;
     flex-direction: row;
     align-items: center;
     flex: none;
 }
-
-.CategoriesContainers {
+div{
+    font-family: Inter;
+    font-weight: 600;
+    line-height: 30px;
+    color: white;
+}
+.HeaderCategoriesContainers {
     gap: 6px;
 }
 
@@ -14,13 +18,19 @@
     font-family: 'Inter', sans-serif;
 }
 
-.CategoriesText {
-    font-family: 'Inter';
+@supports (font-variation-settings: normal) {
+    :root {
+        font-family: 'Inter var', sans-serif;
+    }
+}
+
+.FooterAndHeaderText {
+    font-family: Inter;
     font-weight: 600;
     font-size: 20px;
     line-height: 30px;
     color: white;
-    /* text-align: center; */
+    text-align: center;
     align-items: center;
     display: flex;
 }
@@ -42,6 +52,9 @@
 #SearchTextArea {
     font-family: Inter;
     font-weight: 400;
+    background: unset;
+    width:85%;
+    height:100%;
     font-size: 20px;
     line-height: 30px;
     color: #808080;
