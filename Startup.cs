@@ -6,10 +6,11 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SkidEl.Models;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.Configuration;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
+using Microsoft.EntityFrameworkCore;
 
 namespace SkidEl
 {
@@ -21,32 +22,34 @@ namespace SkidEl
         {
             // этот метод был пустой
             //Enable Cors
-            services.AddCors(c =>
-            {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            });
-
+            //services.AddCors(c =>
+            //{
+            //    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            //});
+            services.AddDbContext<SkidElContext>();
+            services.AddControllersWithViews();
+            
             //JsonSerializer
-            services.AddControllersWithViews().AddNewtonsoftJson(options=>
-            options.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore)
-                .AddNewtonsoftJson(optoins=> optoins.SerializerSettings.ContractResolver
-                =new DefaultContractResolver());
-            services.AddControllers();
+            //services.AddControllersWithViews().AddNewtonsoftJson(options=>
+            //options.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+            //    .AddNewtonsoftJson(optoins=> optoins.SerializerSettings.ContractResolver
+            //    =new DefaultContractResolver());
+            //services.AddControllers();
         }
-        
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
             //Enable Cors
-            app.UseCors(options=>options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //app.UseCors(options=>options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
 
-            app.UseRouting();
-            app.UseAuthorization();
+            //app.UseRouting();
+            //app.UseAuthorization();
 
             //app.UseEndpoints(endpoints =>
             //{
@@ -55,13 +58,19 @@ namespace SkidEl
             //        await context.Response.WriteAsync("Hello World!");
             //    });
             //});
-            //app.UseDeveloperExceptionPage();
-            //app.UseRouting();
-            //app.UseDefaultFiles();
+            app.UseDeveloperExceptionPage();
+            app.UseRouting();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers(); // Маршрутизация на конотроллеры
+            //});
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers(); // Маршрутизация на конотроллеры
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}");
             });
         }
     }

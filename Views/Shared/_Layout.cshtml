@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="~/css/InterParams.css"/>
+    <link rel="stylesheet" href="~/css/Layout.css"/>
+</head>
+<body>
+    <header>
+        <div class="Containers" style="gap:75px; padding: 5px 20px 5px 55px;background:#00EF0E; border-radius:35px">
+        <img src="~/images/Logo.svg" style="width: 119px; transform: rotate(-2deg); filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25)); order:0; margin-bottom: 2px"/>
+        <div style="display: flex; flex-direction: row; gap: 30px; order: 1">
+            <div class="Containers HeaderCategoriesContainers" style="order:0">
+                <img src="~/images/SmartphoneIcon.svg" style="margin-bottom: -8px"/>
+                <div class="FooterAndHeaderText">Смартфоны</div>
+            </div>
+            <div class="Containers HeaderCategoriesContainers" style="order:1">
+                <img src="~/images/LaptopIcon.svg" style="margin-bottom: -8px"/>
+                <div class="FooterAndHeaderText">Ноутбуки</div>
+            </div>
+            <div class="Containers HeaderCategoriesContainers" style="order:2">
+                <img src="~/images/TVIcon.svg" style="margin-bottom: -8px"/>
+                <div class="FooterAndHeaderText">Телевизоры</div>
+            </div>
+            <div class="Containers HeaderCategoriesContainers" style="order:3">
+                <img src="~/images/CatalogIcon.svg" style="margin-bottom: -8px"/>
+                <div class="FooterAndHeaderText">Каталог</div>
+            </div>
+        </div>
+        <div id="SearchField" style="order: 2">
+            <img src="~/images/SearchIcon.svg"/>
+            <input id="SearchTextArea" value="Поиск..."/>
+        </div>
+    </div>
+    </header>
+    <div style="margin: 10px 0px">
+        @RenderBody()
+    </div>
+    <footer>
+        <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 40px 100px; gap: 15px; background: #EF003C; border-radius: 25px">
+        <img src="../../Images/Logo.svg" style="width: 140px"/>
+        <div style="border: 1px solid white; width: 100%; border-radius: 50px"></div>
+        <div style="display: flex; flex-direction: row; gap: 50px">
+            <div class="FooterAndHeaderText">Техника</div>
+            <div class="FooterAndHeaderText">Магазины</div>
+            <div class="FooterAndHeaderText">Бренды</div>
+            <div class="FooterAndHeaderText">Акции</div>
+        </div>
+    </div>
+    </footer>
+        <script src="~/lib/jquery-3.6.3.min.js"></script>
+        <script src="~/js/Layout.js"></script>
+        @*@await RenderSectionAsync("Scripts", required: false)*@
+</body>
+</html>
