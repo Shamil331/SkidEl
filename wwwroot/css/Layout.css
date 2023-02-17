@@ -109,6 +109,7 @@ a:any-link {
     background-color: white;
     color: #EF003C;
     transition-duration: 500ms;
+    cursor:  pointer;
 }
 .Cursor-pointer{
     cursor: pointer;
