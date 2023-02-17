@@ -10,6 +10,13 @@ div{
     line-height: 30px;
     color: white;
 }
+button {
+    font-family: Inter;
+    font-weight: 600;
+    line-height: 30px;
+    color: white;
+    border: none;
+}
 .HeaderCategoriesContainers {
     gap: 6px;
 }
@@ -34,7 +41,6 @@ div{
     align-items: center;
     display: flex;
 }
-
 #SearchField {
     flex-direction: row;
     padding: 0px 0px 0px 10px;
@@ -66,6 +72,44 @@ div{
 #SearchTextArea:focus-visible {
     outline-width: 0px;
 }
-div:hover{
-    cursor:default;
+div:any-link {
+    text-decoration: none;
+}
+div:any-link:hover {
+    color: #00EF0E;
+    animation-duration:3s;
+}
+a:any-link {
+    text-decoration: none;
+    color: blue;
+}
+
+    a:any-link:hover {
+        color: #00EF0E;
+    }
+.DiscountTitleLink {
+    line-height:25px;
+}
+.DiscountTitleLink:hover{
+    color: #fa2939;
+    transition-duration: 300ms;
+}
+.BackButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 18px;
+    background: #EF003C;
+    border-radius: 5px;
+    font-size: 20px;
+    align-self: flex-start;
+    border: none;
+}
+.BackButton:hover {
+    background-color: white;
+    color: #EF003C;
+    transition-duration: 500ms;
+}
+.Cursor-pointer{
+    cursor: pointer;
 }

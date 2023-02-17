@@ -1,0 +1,68 @@
+﻿<link rel="stylesheet" href="/css/DiscountsListPage.css"/>
+@using SkidEl;
+@model Tuple<Dictionary<Discount, string>, string, List<Category>, List<Shop>>
+@*@model IEnumerable<SkidEl.Category>*@
+@{
+    ViewBag.Title = "Discounts";
+    Layout = "/Views/Shared/_Layout.cshtml";
+    <div id="BlocksContainer" style="padding:30px 0px">
+        <div style="font-weight: 800; font-size: 30px" class="CategoryTitle">@{
+                if (Model.Item2 == null)
+                {
+                    @Html.Raw("Все товары")
+                    
+                }
+                else
+                {
+                    @Html.Raw(Model.Item2)
+                }
+            }</div>
+        <div style="display: flex; flex-direction: row; gap: 30px ">
+            <div class="DiscountsContainer" style="padding: 5px">
+                @{
+                    foreach (var item in Model.Item1)
+                    {
+                        <a href="~/discount/@Html.DisplayFor(modelitem => item.Key.Id)">
+                            <div style="display:flex; flex-direction:column; gap:5px; width: 200px;">
+                                <image style="width:200px; height:200px; align-self: center; border-radius: 20px" src="@Html.DisplayFor(modelitem => item.Value)"></image>
+                                <div style="display: flex; flex-direction: row; gap: 5px; align-items: end; line-height:unset">
+                                    <div style="font-weight: bold; font-size: 20px;">@Html.DisplayFor(modelitem => item.Key.NowPrice)</div>
+                                    <div style="color: gray; text-decoration: line-through">@Html.DisplayFor(modelitem => item.Key.PreviousPrice)</div>
+                                </div>
+                                <div class="DiscountTitleLink">@Html.DisplayFor(modelitem => item.Key.Name)</div>
+                            </div>
+                        </a>
+                    }
+                }
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 30px">
+                <div style="display: flex; flex-direction: column; gap: 10px; padding: 10px; border: 1px solid #D6DCE0; width: 250px; height: fit-content; border-radius: 5px; background: white">
+                    <div style="color: #EF003C; font-size: 18px; font-weight: 600">Магазины</div>
+                    <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
+                    <input class="SearchArea" value="Введите название"/>
+                    <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
+                    @{
+                        foreach(var cat in Model.Item4)
+                        {
+                            <div style="display: flex; flex-direction: row; gap: 10px; padding: 10px">
+                                <input type="checkbox" id="@Html.DisplayFor(category => cat.Name)"/>
+                                <div style="color: #808080; font-size: 20px; font-weight: 600;">@Html.DisplayFor(category => cat.Name)</div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div>
+                    <div style="display: flex; flex-direction: column; gap: 10px; padding: 10px; border: 1px solid #D6DCE0; width: 250px; height: fit-content; border-radius: 5px; background: white">
+                        <a href="~/discounts/"><div  class="ListCategoryName">Все товары</div></a>
+                        <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
+                        @foreach(var cat in Model.Item3)
+                        {
+                            <a href="~/discounts/@Html.DisplayFor(category => cat.Name)"><div class="ListCategoryName">@Html.DisplayFor(category => cat.Name)</div></a>
+                            <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

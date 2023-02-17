@@ -68,10 +68,20 @@ namespace SkidEl
             //});
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(name: "main",
+                    pattern: "sale/{*product}",
+                    defaults: new { controller = "SkidEl", action = "MainPage" });
+                endpoints.MapControllerRoute(name: "discounts",
+                    pattern: "discounts/{*category}",
+                    defaults: new {controller = "SkidEl", action = "DiscountsListPage" });
+                endpoints.MapControllerRoute(name: "discounts",
+                    pattern: "discount/{_discount}",
+                    defaults: new { controller = "SkidEl", action = "DiscountPage" });
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}");
+                    pattern: "{controller=SkidEl}/{action=MainPage}");
             });
+
         }
     }
 }

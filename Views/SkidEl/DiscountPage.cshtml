@@ -1,0 +1,51 @@
+﻿<link rel="stylesheet" href="/css/DiscountPage.css"/>
+@using SkidEl;
+@model Tuple<Discount, Dictionary<Discount, string>>
+@*@model IEnumerable<SkidEl.Category>*@
+@{
+    ViewBag.Title = "Discounts";
+    Layout = "/Views/Shared/_Layout.cshtml";
+    <div class="ContentContainer">
+        <button class="BackButton">Назад</button>
+        <div style="display: flex; flex-direction: row; gap: 50px">
+            <div style="display: flex; flex-direction: column; gap: 10px">
+                <image class="DiscountImageBig" style="border-radius: 25px" src="@Html.DisplayFor(t => t.Item1.DiscountImages.First().ImageUrl)"></image>
+                <ul class="DiscountImageSmallContainer">
+                    @{
+                        foreach(var i in Model.Item1.DiscountImages)
+                        {
+                            <li class="DiscountImageSmall" style="background-image: url(@Html.DisplayFor(item => i.ImageUrl))">
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="DiscountInfoContainer">
+                <div class="DiscountTitle">@Html.DisplayFor(item => item.Item1.Name)</div>
+                <div style="display: flex; flex-direction: row; gap: 10px">
+                    <div class="SalePrice">@Html.DisplayFor(item => item.Item1.NowPrice)Р</div>
+                    <div class="BasePrice">@Html.DisplayFor(item => item.Item1.PreviousPrice)</div>
+                </div>
+                <div class="DiscountDescription">@Html.DisplayFor(item => item.Item1.Description)</div>
+            </div>
+        </div>
+        <div style="font-weight: 800; font-size: 30px">Похожие товары</div>
+        <div class="SimilarDiscountsContainer" style="padding: 5px">
+                @{
+                    foreach (var item in Model.Item2)
+                    {
+                        <a href="~/discount/@Html.DisplayFor(modelitem => item.Key.Id)">
+                            <div style="display:flex; flex-direction:column; gap:5px; width: 200px;">
+                                <image style="width:200px; height:200px; align-self: center; border-radius: 20px" src="@Html.DisplayFor(modelitem => item.Value)"></image>
+                                <div style="display: flex; flex-direction: row; gap: 5px; align-items: end; line-height:unset">
+                                    <div style="font-weight: bold; font-size: 20px;">@Html.DisplayFor(modelitem => item.Key.NowPrice)</div>
+                                    <div style="color: gray; text-decoration: line-through">@Html.DisplayFor(modelitem => item.Key.PreviousPrice)</div>
+                                </div>
+                                <div class="DiscountTitleLink">@Html.DisplayFor(modelitem => item.Key.Name)</div>
+                            </div>
+                        </a>
+                    }
+                }
+            </div>
+    </div>
+}
