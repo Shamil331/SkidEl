@@ -59,9 +59,7 @@ namespace SkidEl
 
                 entity.Property(e => e.Description).HasColumnName("description");
 
-                entity.Property(e => e.EndDate)
-                    .HasColumnType("date")
-                    .HasColumnName("end_date");
+                entity.Property(e => e.Link).HasColumnName("link");
 
                 entity.Property(e => e.Name).HasColumnName("name");
 
@@ -70,10 +68,6 @@ namespace SkidEl
                 entity.Property(e => e.PreviousPrice).HasColumnName("previous_price");
 
                 entity.Property(e => e.ShopId).HasColumnName("shop_id");
-
-                entity.Property(e => e.StartDate)
-                    .HasColumnType("date")
-                    .HasColumnName("start_date");
 
                 entity.Property(e => e.SubcategoryId).HasColumnName("subcategory_id");
 
