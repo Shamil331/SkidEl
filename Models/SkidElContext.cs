@@ -28,7 +28,7 @@ namespace SkidEl
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Host=localhost;Database=SkidEl;Username=postgres;Password=Shamil25");
+                optionsBuilder.UseNpgsql("Host=mel.db.elephantsql.com;Database=agrovshd;Username=agrovshd;Password=U8jbpOUnTZsiAnMjKh3vqHEitl_02zpf");
             }
         }
 
@@ -59,7 +59,7 @@ namespace SkidEl
 
                 entity.Property(e => e.Description).HasColumnName("description");
 
-                entity.Property(e => e.Link).HasColumnName("link");
+                //entity.Property(e => e.Link).HasColumnName("link");
 
                 entity.Property(e => e.Name).HasColumnName("name");
 
