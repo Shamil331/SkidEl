@@ -56,22 +56,27 @@ namespace SkidEl.Controllers
             Tuple<Discount, Dictionary<Discount, string>> tuple = new Tuple<Discount, Dictionary<Discount, string>>(discount, similarDiscountsAndImages);
             return View(tuple);
         }
-        public IActionResult DiscountsListPage(string category=null)
+        public IActionResult DiscountsListPage(string category="Все товары", int page=1)
         {
             List<Discount> discounts = new List<Discount>();
             List<Subcategory> subcategories= _context.Subcategories.Where(c => c.CategorieId == _context.Categories.Where(c => c.Name==category).Select(c=>c.Id).FirstOrDefault()).ToList();
-            if (category == null)
+            if (category == "Все товары")
             {
                 discounts = _context.Discounts.ToList();
-                
             }
             else
             {
                 foreach (var i in subcategories)
                 {
+                    //discounts.AddRange(_context.Discounts.Where(x => x.SubcategoryId == i.Id).Skip((page-1)*24).Take(24).ToList());
                     discounts.AddRange(_context.Discounts.Where(x => x.SubcategoryId == i.Id).ToList());
                 }
             }
+            
+            int PagesCount = discounts.Count/24;
+            if (PagesCount * 24 != discounts.Count)
+                PagesCount++;
+            discounts = discounts.Skip((page - 1) * 24).Take(24).ToList();
             discounts.ForEach(i => i.DiscountImages.Union(_context.DiscountImages.Where(t => t.DiscountId == i.Id)).ToList());
             Dictionary<Discount, string> DiscountsAndImages = new Dictionary<Discount, string>();
             foreach (var i in discounts)
@@ -80,7 +85,7 @@ namespace SkidEl.Controllers
                 if (CurrentDiscountImageUrl == null) continue;
                 DiscountsAndImages.Add(i, CurrentDiscountImageUrl);
             }
-            var tuple = new Tuple<Dictionary<Discount, string>, string, List<Category>, List<Shop>>(DiscountsAndImages, category, _context.Categories.ToList(), _context.Shops.ToList());
+            var tuple = new Tuple<Dictionary<Discount, string>, string, List<Category>, List<Shop>, int>(DiscountsAndImages, category, _context.Categories.ToList(), _context.Shops.ToList(), PagesCount);
             return View(tuple);
         }
     }

@@ -10,7 +10,16 @@ $(function () {
     $(".ListCategoryName").each(function (index) {
         if ($(this).text() == $(".CategoryTitle").text()) {
             $(this).css('color', '#EF003C');
-            
+        }
+    })
+    var pathname = window.location.pathname;
+    var PageNumber = pathname.split('/')[3];
+    $(".PageCounter").each(function (index) {
+        if ($(this).text() == PageNumber) {
+            $(this).addClass('PageCounterActive');
+        }
+        else {
+            $(this).addClass('PageCounterNotActive');
         }
     })
 })
