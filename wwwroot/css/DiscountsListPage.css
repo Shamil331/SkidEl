@@ -64,7 +64,35 @@
 
 .PageCounterContainer {
     display: flex;
+    list-style: none;
+    max-width: calc(100%-76px);
+    overflow: hidden;
     flex-direction: row;
     gap: 10px;
-    padding: 0 10px 0 10px
+    padding: 0 10px 0 10px;
+}
+.PageCounterContainer li{
+    list-style-type: none;
+}
+.list{
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    width: 500px;
+    gap: 10px;
+}
+
+.list>[data-scroll]{
+    display: flex;
+    align-items: center;
+    -webkit-user-select: none;
+}
+
+.ListArrow {
+    height: 35px;
+    width: 35px
+}
+
+.ListArrow:hover{
+    opacity: 50%;
 }

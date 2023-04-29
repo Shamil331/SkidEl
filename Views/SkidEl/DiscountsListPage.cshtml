@@ -64,11 +64,17 @@
                 </div>
             </div>
         </div>
-        <div class="PageCounterContainer">
-        @for(int i = 1; i<=Model.Item5; i++)
-            {
-                <a href="./@i"><div class="PageCounter">@i</div></a>
-            }
+        <div class="list" id="list_1">
+            <span data-scroll="0" style="align-self: center" id="test"><img src="~/images/ArrowLeft.svg" class="ListArrow"></span>
+            <ul class="PageCounterContainer">
+                @for(int i = 1; i<=Model.Item5; i++)
+                    {
+                        <li>
+                            <a href="./@i"><div class="PageCounter">@i</div></a>
+                        </li>
+                    }
+            </ul>
+            <span data-scroll="1" style="align-self: center"><img src="~/images/ArrowRight.svg" class="ListArrow"/></span>
         </div>
     </div>
 }

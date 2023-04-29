@@ -26,7 +26,7 @@ namespace SkidEl.Controllers
             //{
             //    i.DiscountImages = _context.DiscountImages.Where(t => t.DiscountId == i.Id).ToList();
             //}
-            discounts.ForEach(i => i.DiscountImages.Union(_context.DiscountImages.Where(t => t.DiscountId == i.Id)).ToList());
+            discounts.ForEach(i => i.DiscountImages.Union(_context.DiscountImages.Where(t => t.DiscountLink == i.Link)).ToList());
             //List<string> discountImageUrls = discounts.Select(t => t.DiscountImages.Select(x => x.ImageUrl).FirstOrDefault()).ToList();
             Dictionary<Discount, string> DiscountsAndImages = new Dictionary<Discount, string>();
             foreach (var i in discounts)
@@ -41,11 +41,11 @@ namespace SkidEl.Controllers
         public IActionResult DiscountPage(int _discount)
         {
             Discount discount = _context.Discounts.Where(d => d.Id==_discount).FirstOrDefault();
-            discount.DiscountImages.Union(_context.DiscountImages.Where(t => t.DiscountId == discount.Id).ToList());
+            discount.DiscountImages.Union(_context.DiscountImages.Where(t => t.DiscountLink == discount.Link).ToList());
             List<Discount> _similarDiscounts = _context.Discounts.Where(d => d.SubcategoryId == discount.SubcategoryId && d.Id!=discount.SubcategoryId).ToList();
             Random rnd = new Random();
             _similarDiscounts=_similarDiscounts.OrderBy(item => rnd.Next()).Take(10).ToList();
-            _similarDiscounts.ForEach(i => i.DiscountImages.Union(_context.DiscountImages.Where(t => t.DiscountId == i.Id)).ToList());
+            _similarDiscounts.ForEach(i => i.DiscountImages.Union(_context.DiscountImages.Where(t => t.DiscountLink == i.Link)).ToList());
             Dictionary<Discount, string> similarDiscountsAndImages = new Dictionary<Discount, string>();
             foreach (var i in _similarDiscounts)
             {
@@ -77,7 +77,7 @@ namespace SkidEl.Controllers
             if (PagesCount * 24 != discounts.Count)
                 PagesCount++;
             discounts = discounts.Skip((page - 1) * 24).Take(24).ToList();
-            discounts.ForEach(i => i.DiscountImages.Union(_context.DiscountImages.Where(t => t.DiscountId == i.Id)).ToList());
+            discounts.ForEach(i => i.DiscountImages.Union(_context.DiscountImages.Where(t => t.DiscountLink == i.Link)).ToList());
             Dictionary<Discount, string> DiscountsAndImages = new Dictionary<Discount, string>();
             foreach (var i in discounts)
             {

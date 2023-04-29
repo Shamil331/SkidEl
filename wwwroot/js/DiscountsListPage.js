@@ -23,3 +23,8 @@ $(function () {
         }
     })
 })
+let list = (e) => {
+    let list = e.children[1], step = list.clientWidth;
+    [...list_1.querySelectorAll("[data-scroll]")].forEach(e => e.addEventListener("click", () => list.scrollLeft += Number(e.dataset.scroll) ? step : -step));
+}
+list(list_1);
