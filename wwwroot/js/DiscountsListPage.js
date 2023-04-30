@@ -11,6 +11,12 @@ $(function () {
         if ($(this).text() == $(".CategoryTitle").text()) {
             $(this).css('color', '#EF003C');
         }
+        var CurrentCategoryOpener = $(this).text();
+        CurrentCategoryOpener=CurrentCategoryOpener.replace(/\s/g, "");
+        $("#" + CurrentCategoryOpener + "ListOpener").click(function () {
+            var CurrentSubcategorieDiv = $("#" + CurrentCategoryOpener + "Subcategories");
+            CurrentSubcategorieDiv.toggleClass("DisplayNone DisplayFlex");
+        })
     })
     var pathname = window.location.pathname;
     var PageNumber = pathname.split('/')[3];
@@ -20,7 +26,13 @@ $(function () {
         }
         else {
             $(this).addClass('PageCounterNotActive');
-        }
+        }  
+    })
+    $(".aLinked").each(function (index) {
+        var FullUrl = new URL(location.href);
+        var Page = FullUrl.searchParams.get('Page');
+        FullUrl.searchParams.set('Page', $(this).attr('href'));
+        $(this).attr('href', FullUrl);
     })
 })
 let list = (e) => {

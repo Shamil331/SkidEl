@@ -71,8 +71,11 @@ namespace SkidEl
                 endpoints.MapControllerRoute(name: "Main",
                     pattern: "main",
                     defaults: new { controller = "SkidEl", action = "MainPage" });
+                //endpoints.MapControllerRoute(name: "discounts",
+                //    pattern: "discounts/{category}/{page}",
+                //    defaults: new { controller = "SkidEl", action = "DiscountsListPage" });
                 endpoints.MapControllerRoute(name: "discounts",
-                    pattern: "discounts/{category}/{page}",
+                    pattern: "discounts",
                     defaults: new { controller = "SkidEl", action = "DiscountsListPage" });
                 endpoints.MapControllerRoute(name: "discounts",
                     pattern: "discount/{_discount}",

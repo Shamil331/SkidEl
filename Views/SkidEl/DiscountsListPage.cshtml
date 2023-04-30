@@ -53,12 +53,28 @@
                 </div>
                 <div>
                     <div style="display: flex; flex-direction: column; gap: 10px; padding: 10px; border: 1px solid #D6DCE0; width: 250px; height: fit-content; border-radius: 5px; background: white">
-                        <a href="~/discounts/Все товары/1"><div  class="ListCategoryName">Все товары</div></a>
+                        <a href="~/discounts?Category=Все товары&Page=1"><div  class="ListCategoryName">Все товары</div></a>
                         <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
                         @foreach(var cat in Model.Item3)
                         {
-                            <a href="~/discounts/@Html.DisplayFor(category => cat.Name)/1"><div class="ListCategoryName">@Html.DisplayFor(category => cat.Name)</div></a>
-                            <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
+                            <div style="display: flex; flex-direction:row; justify-content: space-between">
+                                <a href="~/discounts?Category=@Html.DisplayFor(category => cat.Name)&Page=1" style="align-self: center"><div class="ListCategoryName">@Html.DisplayFor(category => cat.Name)</div></a>
+                                <div style="color: black; align-self: center" id="@Html.DisplayName(@cat.Name.Replace(" ",""))ListOpener">Open</div>
+                            </div>
+                            <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px; margin-bottom:-5px"></div>
+                            <div style="gap: 5px; flex-direction: column;" class="DisplayFlex" id="@Html.DisplayName(cat.Name.Replace(" ",""))Subcategories">
+                                @{
+                                    using (SkidElContext context = new SkidElContext())
+                                    {
+                                        List<Subcategory> subcategories = context.Subcategories.Where(x => x.CategorieId == cat.Id).ToList();
+                                        foreach (var subc in subcategories)
+                                        {
+                                            <div class="ListSubcategorieName">@subc.Name</div>
+                                            <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
+                                        }
+                                    }
+                                }
+                            </div>
                         }
                     </div>
                 </div>
@@ -70,7 +86,7 @@
                 @for(int i = 1; i<=Model.Item5; i++)
                     {
                         <li>
-                            <a href="./@i"><div class="PageCounter">@i</div></a>
+                            <a href="@i" class="aLinked"><div class="PageCounter">@i</div></a>
                         </li>
                     }
             </ul>
