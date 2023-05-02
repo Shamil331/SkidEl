@@ -26,7 +26,11 @@
                     <div class="SalePrice">@Html.DisplayFor(item => item.Item1.NowPrice)Р</div>
                     <div class="BasePrice">@Html.DisplayFor(item => item.Item1.PreviousPrice)</div>
                 </div>
-                <div class="DiscountDescription">@Html.DisplayFor(item => item.Item1.Description)</div>
+                <div style="display: flex; flex-direction: column; gap: 10px">
+                    <div class="DiscountDescription">@Html.DisplayFor(item => item.Item1.Description)</div>
+                    <a href="@Html.DisplayFor(item => item.Item1.Link)" target="_blank"><div class="ProductLink">Ссылка на товар</div></a>
+                </div>
+
             </div>
         </div>
         <div style="font-weight: 800; font-size: 30px">Похожие товары</div>

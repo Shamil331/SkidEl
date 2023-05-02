@@ -56,23 +56,35 @@ namespace SkidEl.Controllers
             Tuple<Discount, Dictionary<Discount, string>> tuple = new Tuple<Discount, Dictionary<Discount, string>>(discount, similarDiscountsAndImages);
             return View(tuple);
         }
-        public IActionResult DiscountsListPage(string category="Все товары", int page=1)
+        public IActionResult DiscountsListPage(string[] Shops,string category = "Все товары", string subcategory = "", int page=1)
         {
+            string[] SelectedShops = Shops;
             List<Discount> discounts = new List<Discount>();
             List<Subcategory> subcategories= _context.Subcategories.Where(c => c.CategorieId == _context.Categories.Where(c => c.Name==category).Select(c=>c.Id).FirstOrDefault()).ToList();
+            string TitleToReturn;
             if (category == "Все товары")
             {
                 discounts = _context.Discounts.ToList();
+                TitleToReturn = "Все товары";
             }
             else
             {
-                foreach (var i in subcategories)
+                if(subcategory!="")
                 {
-                    //discounts.AddRange(_context.Discounts.Where(x => x.SubcategoryId == i.Id).Skip((page-1)*24).Take(24).ToList());
-                    discounts.AddRange(_context.Discounts.Where(x => x.SubcategoryId == i.Id).ToList());
+                    Subcategory OnlyOneSucategory = subcategories.Where(c => c.Name.Replace(" ", "") == subcategory).FirstOrDefault();
+                    TitleToReturn = OnlyOneSucategory.Name;
+                    discounts.AddRange(_context.Discounts.Where(x => x.SubcategoryId == OnlyOneSucategory.Id).ToList());
                 }
-            }
-            
+                else
+                {
+                    TitleToReturn = category;
+                    foreach (var i in subcategories)
+                    {
+                        //discounts.AddRange(_context.Discounts.Where(x => x.SubcategoryId == i.Id).Skip((page-1)*24).Take(24).ToList());
+                        discounts.AddRange(_context.Discounts.Where(x => x.SubcategoryId == i.Id).ToList());
+                    }
+                }
+            }            
             int PagesCount = discounts.Count/24;
             if (PagesCount * 24 != discounts.Count)
                 PagesCount++;
@@ -85,7 +97,7 @@ namespace SkidEl.Controllers
                 if (CurrentDiscountImageUrl == null) continue;
                 DiscountsAndImages.Add(i, CurrentDiscountImageUrl);
             }
-            var tuple = new Tuple<Dictionary<Discount, string>, string, List<Category>, List<Shop>, int>(DiscountsAndImages, category, _context.Categories.ToList(), _context.Shops.ToList(), PagesCount);
+            var tuple = new Tuple<Dictionary<Discount, string>, string, List<Category>, List<Shop>, int>(DiscountsAndImages, TitleToReturn, _context.Categories.ToList(), _context.Shops.ToList(), PagesCount);
             return View(tuple);
         }
     }

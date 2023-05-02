@@ -107,6 +107,26 @@
     display: none;
 }
 
-.DisplayFlex{
+.DisplayFlex {
     display: flex;
+}
+
+.ApplyButton {
+    align-content: center;
+    justify-content: center;
+    background: #0249FF;
+    border-radius: 7px;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.ApplyButton:hover {
+    background: #EF003C;
+    opacity: 0.8;
+}
+
+.ArrowForList{
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
 }

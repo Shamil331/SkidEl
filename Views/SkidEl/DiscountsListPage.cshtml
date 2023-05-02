@@ -10,7 +10,6 @@
                 if (Model.Item2 == null)
                 {
                     @Html.Raw("Все товары")
-                    
                 }
                 else
                 {
@@ -37,29 +36,32 @@
             </div>
             <div style="display: flex; flex-direction: column; gap: 30px">
                 <div style="display: flex; flex-direction: column; gap: 10px; padding: 10px; border: 1px solid #D6DCE0; width: 250px; height: fit-content; border-radius: 5px; background: white">
-                    <div style="color: #EF003C; font-size: 18px; font-weight: 600">Магазины</div>
+                    <div style="color: #EF003C; font-size: 20px; font-weight: 600">Магазины</div>
                     <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
-                    <input class="SearchArea" value="Введите название"/>
-                    <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
+                    <!--<input class="SearchArea" value="Введите название"/>
+                    <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>-->
                     @{
-                        foreach(var cat in Model.Item4)
+                        foreach(var shop in Model.Item4)
                         {
                             <div style="display: flex; flex-direction: row; gap: 10px; padding: 10px">
-                                <input type="checkbox" id="@Html.DisplayFor(category => cat.Name)"/>
-                                <div style="color: #808080; font-size: 20px; font-weight: 600;">@Html.DisplayFor(category => cat.Name)</div>
+                                <input type="checkbox" Class="ShopCheckBox" id="@Html.DisplayFor(shops => shop.Name)Checker"/>
+                                <div style="color: #808080; font-size: 20px; font-weight: 600;">@Html.DisplayFor(shops => shop.Name)</div>
                             </div>
                         }
                     }
+                    <button class="ApplyButton">
+                    <div>Применить</div>
+                    </button>
                 </div>
                 <div>
                     <div style="display: flex; flex-direction: column; gap: 10px; padding: 10px; border: 1px solid #D6DCE0; width: 250px; height: fit-content; border-radius: 5px; background: white">
-                        <a href="~/discounts?Category=Все товары&Page=1"><div  class="ListCategoryName">Все товары</div></a>
+                        <a href="~/discounts?Category=Все товары&Page=1" class="aNewCategory"><div  class="ListCategoryName">Все товары</div></a>
                         <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
                         @foreach(var cat in Model.Item3)
                         {
                             <div style="display: flex; flex-direction:row; justify-content: space-between">
-                                <a href="~/discounts?Category=@Html.DisplayFor(category => cat.Name)&Page=1" style="align-self: center"><div class="ListCategoryName">@Html.DisplayFor(category => cat.Name)</div></a>
-                                <div style="color: black; align-self: center" id="@Html.DisplayName(@cat.Name.Replace(" ",""))ListOpener">Open</div>
+                                <a href="~/discounts?Category=@Html.DisplayFor(category => cat.Name)&Page=1" style="align-self: center" class="aNewCategory"><div class="ListCategoryName">@Html.DisplayFor(category => cat.Name)</div></a>
+                                <div style="color: black; align-self: center; display: flex; align-content: center" id="@Html.DisplayName(@cat.Name.Replace(" ",""))ListOpener"><img src="~/images/ArrowForLists.svg" class="ArrowForList"/></div>
                             </div>
                             <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px; margin-bottom:-5px"></div>
                             <div style="gap: 5px; flex-direction: column;" class="DisplayFlex" id="@Html.DisplayName(cat.Name.Replace(" ",""))Subcategories">
@@ -69,7 +71,7 @@
                                         List<Subcategory> subcategories = context.Subcategories.Where(x => x.CategorieId == cat.Id).ToList();
                                         foreach (var subc in subcategories)
                                         {
-                                            <div class="ListSubcategorieName">@subc.Name</div>
+                                            <a href="~/discounts?Category=@Html.DisplayFor(category => cat.Name)&Subcategory=@Html.DisplayName(@subc.Name.Replace(" ",""))&Page=1" class="aNewSubcategory"><div class="ListSubcategorieName">@subc.Name</div></a>
                                             <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
                                         }
                                     }
@@ -86,7 +88,7 @@
                 @for(int i = 1; i<=Model.Item5; i++)
                     {
                         <li>
-                            <a href="@i" class="aLinked"><div class="PageCounter">@i</div></a>
+                            <a href="@i" class="PageLinks"><div class="PageCounter">@i</div></a>
                         </li>
                     }
             </ul>

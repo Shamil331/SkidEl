@@ -57,3 +57,9 @@
     align-items: start;
     grid-template-columns: repeat(5, auto);
 }
+.ProductLink{
+    color: white;
+}
+.ProductLink:hover {
+    color: #EF003C;
+}
