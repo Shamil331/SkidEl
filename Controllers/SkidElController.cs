@@ -22,12 +22,7 @@ namespace SkidEl.Controllers
             List<Category> categories = _context.Categories.ToList();
             List<Discount> discounts = _context.Discounts.ToList();
             discounts = discounts.OrderByDescending(x => 1 - (x.NowPrice / x.PreviousPrice)).Take(20).ToList();
-            //foreach (var i in discounts)
-            //{
-            //    i.DiscountImages = _context.DiscountImages.Where(t => t.DiscountId == i.Id).ToList();
-            //}
             discounts.ForEach(i => i.DiscountImages.Union(_context.DiscountImages.Where(t => t.DiscountLink == i.Link)).ToList());
-            //List<string> discountImageUrls = discounts.Select(t => t.DiscountImages.Select(x => x.ImageUrl).FirstOrDefault()).ToList();
             Dictionary<Discount, string> DiscountsAndImages = new Dictionary<Discount, string>();
             foreach (var i in discounts)
             {
@@ -56,9 +51,13 @@ namespace SkidEl.Controllers
             Tuple<Discount, Dictionary<Discount, string>> tuple = new Tuple<Discount, Dictionary<Discount, string>>(discount, similarDiscountsAndImages);
             return View(tuple);
         }
-        public IActionResult DiscountsListPage(string[] Shops,string category = "Все товары", string subcategory = "", int page=1)
+        public IActionResult DiscountsListPage(string[] Shops, string Search,string category = "Все товары", string subcategory = "", int page=1)
         {
-            string[] SelectedShops = Shops;
+            List<int> SelectedShops = new List<int>();
+            foreach (var shop in Shops)
+            {
+                SelectedShops.Add(_context.Shops.Where(x => x.Name.Replace(" ", "") == shop.Replace(" ", "")).Select(x => x.Id).FirstOrDefault());
+            }
             List<Discount> discounts = new List<Discount>();
             List<Subcategory> subcategories= _context.Subcategories.Where(c => c.CategorieId == _context.Categories.Where(c => c.Name==category).Select(c=>c.Id).FirstOrDefault()).ToList();
             string TitleToReturn;
@@ -80,11 +79,19 @@ namespace SkidEl.Controllers
                     TitleToReturn = category;
                     foreach (var i in subcategories)
                     {
-                        //discounts.AddRange(_context.Discounts.Where(x => x.SubcategoryId == i.Id).Skip((page-1)*24).Take(24).ToList());
                         discounts.AddRange(_context.Discounts.Where(x => x.SubcategoryId == i.Id).ToList());
                     }
                 }
-            }            
+            }
+            if (SelectedShops.Count != 0)
+            {
+                discounts = discounts.Where(x => SelectedShops.Exists(y => y == x.ShopId)).ToList();
+            }
+            if (Search != null)
+            {
+                discounts = discounts.Where(x => x.Name.ToLower().Contains(Search.ToLower())).ToList();
+                TitleToReturn="Товары по запросу '" + Search + "'";
+            }
             int PagesCount = discounts.Count/24;
             if (PagesCount * 24 != discounts.Count)
                 PagesCount++;

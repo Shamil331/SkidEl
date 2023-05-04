@@ -103,7 +103,7 @@
     opacity: 50%;
 }
 
-.DisplayNone{
+.DisplayNone {
     display: none;
 }
 
@@ -129,4 +129,9 @@
     height: 15px;
     width: 15px;
     cursor: pointer;
+    transition: 0.25s;
+}
+
+.ArrowForListForwardToUp{
+    transform: rotate(180deg);
 }

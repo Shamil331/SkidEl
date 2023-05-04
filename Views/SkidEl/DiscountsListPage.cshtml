@@ -1,4 +1,5 @@
 ﻿<link rel="stylesheet" href="/css/DiscountsListPage.css"/>
+
 @using SkidEl;
 @model Tuple<Dictionary<Discount, string>, string, List<Category>, List<Shop>, int>
 @*@model IEnumerable<SkidEl.Category>*@
@@ -55,12 +56,12 @@
                 </div>
                 <div>
                     <div style="display: flex; flex-direction: column; gap: 10px; padding: 10px; border: 1px solid #D6DCE0; width: 250px; height: fit-content; border-radius: 5px; background: white">
-                        <a href="~/discounts?Category=Все товары&Page=1" class="aNewCategory"><div  class="ListCategoryName">Все товары</div></a>
+                        <a href="Все товары" class="aNewCategory"><div  class="ListCategoryName">Все товары</div></a>
                         <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
                         @foreach(var cat in Model.Item3)
                         {
                             <div style="display: flex; flex-direction:row; justify-content: space-between">
-                                <a href="~/discounts?Category=@Html.DisplayFor(category => cat.Name)&Page=1" style="align-self: center" class="aNewCategory"><div class="ListCategoryName">@Html.DisplayFor(category => cat.Name)</div></a>
+                                <a href="@Html.DisplayFor(category => cat.Name)" style="align-self: center" class="aNewCategory"><div class="ListCategoryName">@Html.DisplayFor(category => cat.Name)</div></a>
                                 <div style="color: black; align-self: center; display: flex; align-content: center" id="@Html.DisplayName(@cat.Name.Replace(" ",""))ListOpener"><img src="~/images/ArrowForLists.svg" class="ArrowForList"/></div>
                             </div>
                             <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px; margin-bottom:-5px"></div>
@@ -71,7 +72,7 @@
                                         List<Subcategory> subcategories = context.Subcategories.Where(x => x.CategorieId == cat.Id).ToList();
                                         foreach (var subc in subcategories)
                                         {
-                                            <a href="~/discounts?Category=@Html.DisplayFor(category => cat.Name)&Subcategory=@Html.DisplayName(@subc.Name.Replace(" ",""))&Page=1" class="aNewSubcategory"><div class="ListSubcategorieName">@subc.Name</div></a>
+                                            <a href="@Html.DisplayFor(category => cat.Name)&@Html.DisplayName(@subc.Name.Replace(" ",""))" class="aNewSubcategory"><div class="ListSubcategorieName">@subc.Name</div></a>
                                             <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
                                         }
                                     }

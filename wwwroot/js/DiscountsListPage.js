@@ -1,11 +1,12 @@
-﻿$(".SearchArea").focusin(function () {
-    event.target.value = "";
-    event.target.style.color = "#808080";
-})
-$(".SearchArea").focusout(function () {
-    event.target.value = "Введите название";
-    event.target.style.color = "#D6DCE0";
-})
+﻿
+////$(".SearchArea").focusin(function () {
+////    event.target.value = "";
+////    event.target.style.color = "#808080";
+////})
+////$(".SearchArea").focusout(function () {
+////    event.target.value = "Введите название";
+////    event.target.style.color = "#D6DCE0";
+////})
 var GotShops = new URL(location.href).searchParams.getAll('Shops');
 var SelectedShops = new URL(location.href).searchParams.getAll('Shops');
 var FullUrl = new URL(location.href);
@@ -64,6 +65,15 @@ $(function () {
             $(this).addClass('PageCounterNotActive');
         }  
     })
+    if ($(".PageCounter").last().hasClass('PageCounterActive')) {
+        $(".ListArrow").last().addClass('DisplayNone');
+    }
+    if ($(".PageCounter").first().hasClass('PageCounterActive')) {
+        $(".ListArrow").first().addClass('DisplayNone');
+    }
+    if ($(".PageCounter").length == 0) {
+        $(".ListArrow").addClass('DisplayNone');
+    }
     $(".PageLinks").each(function (index) {
         var Page = FullUrl.searchParams.get('Page');
         FullUrl.searchParams.set('Page', $(this).attr('href'));
@@ -74,10 +84,23 @@ $(function () {
         ShopsToStand += "&Shops=" + element;
     })
     $(".aNewCategory").each(function () {
-        $(this).attr('href', $(this).attr('href') + ShopsToStand);
+        var UrlToRedirect = new URL(window.location.href);
+        UrlToRedirect.searchParams.set('Category', $(this).attr('href'));
+        UrlToRedirect.searchParams.set('Page', 1);
+        $(this).attr('href', UrlToRedirect);
     })
     $(".aNewSubcategory").each(function () {
-        $(this).attr('href', $(this).attr('href') + ShopsToStand);
+        var UrlToRedirect = new URL(window.location.href);
+        UrlToRedirect.searchParams.set('Category', $(this).attr('href').split('&')[0]);
+        UrlToRedirect.searchParams.set('Subcategory', $(this).attr('href').split('&')[1]);
+        UrlToRedirect.searchParams.set('Page', 1);
+        $(this).attr('href', UrlToRedirect);
+        //$(this).attr('href', $(this).attr('href') + ShopsToStand);
+    })
+})
+$(".ArrowForList").each(function () {
+    $(this).click(function () {
+        $(this).toggleClass('ArrowForListForwardToUp');
     })
 })
 $(".ApplyButton").click(function () {
