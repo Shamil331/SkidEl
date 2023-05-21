@@ -90,7 +90,7 @@ namespace SkidEl.Controllers
             if (Search != null)
             {
                 discounts = discounts.Where(x => x.Name.ToLower().Contains(Search.ToLower())).ToList();
-                TitleToReturn="Товары по запросу '" + Search + "'";
+                TitleToReturn = $"Результат по запросу {Search}";
             }
             int PagesCount = discounts.Count/24;
             if (PagesCount * 24 != discounts.Count)
@@ -104,6 +104,7 @@ namespace SkidEl.Controllers
                 if (CurrentDiscountImageUrl == null) continue;
                 DiscountsAndImages.Add(i, CurrentDiscountImageUrl);
             }
+            if (discounts.Count == 0) TitleToReturn = $"По запросу '{Search}' ничего не найдено";
             var tuple = new Tuple<Dictionary<Discount, string>, string, List<Category>, List<Shop>, int>(DiscountsAndImages, TitleToReturn, _context.Categories.ToList(), _context.Shops.ToList(), PagesCount);
             return View(tuple);
         }

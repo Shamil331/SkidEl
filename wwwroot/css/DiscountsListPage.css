@@ -6,6 +6,7 @@
     justify-items: center;
     align-items: start;
     grid-template-columns: repeat(4, auto);
+    width: 950px;
 }
 
 #BlocksContainer {
@@ -86,6 +87,7 @@
     overflow: hidden;
     width: 500px;
     gap: 10px;
+    justify-content: center;
 }
 
 .list>[data-scroll]{

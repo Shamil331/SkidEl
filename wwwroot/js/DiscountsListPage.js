@@ -65,13 +65,13 @@ $(function () {
             $(this).addClass('PageCounterNotActive');
         }  
     })
-    if ($(".PageCounter").last().hasClass('PageCounterActive')) {
-        $(".ListArrow").last().addClass('DisplayNone');
-    }
-    if ($(".PageCounter").first().hasClass('PageCounterActive')) {
-        $(".ListArrow").first().addClass('DisplayNone');
-    }
-    if ($(".PageCounter").length == 0) {
+    //if ($(".PageCounter").last().hasClass('PageCounterActive')) {
+    //    $(".ListArrow").last().addClass('DisplayNone');
+    //}
+    //if ($(".PageCounter").first().hasClass('PageCounterActive')) {
+    //    $(".ListArrow").first().addClass('DisplayNone');
+    //}
+    if ($(".PageCounter").length <= 9) {
         $(".ListArrow").addClass('DisplayNone');
     }
     $(".PageLinks").each(function (index) {
