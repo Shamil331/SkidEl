@@ -1,6 +1,7 @@
 ﻿<link rel="stylesheet" href="/css/DiscountsListPage.css"/>
+
 @using SkidEl;
-@model Tuple<Dictionary<Discount, string>, string, List<Category>, List<Shop>>
+@model Tuple<Dictionary<Discount, string>, string, List<Category>, List<Shop>, int>
 @*@model IEnumerable<SkidEl.Category>*@
 @{
     ViewBag.Title = "Discounts";
@@ -10,11 +11,10 @@
                 if (Model.Item2 == null)
                 {
                     @Html.Raw("Все товары")
-                    
                 }
                 else
                 {
-                    @Html.Raw(Model.Item2)
+                    @Html.Raw(Model.Item2);
                 }
             }</div>
         <div style="display: flex; flex-direction: row; gap: 30px ">
@@ -37,32 +37,63 @@
             </div>
             <div style="display: flex; flex-direction: column; gap: 30px">
                 <div style="display: flex; flex-direction: column; gap: 10px; padding: 10px; border: 1px solid #D6DCE0; width: 250px; height: fit-content; border-radius: 5px; background: white">
-                    <div style="color: #EF003C; font-size: 18px; font-weight: 600">Магазины</div>
+                    <div style="color: #C3073F; font-size: 20px; font-weight: 600">Магазины</div>
                     <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
-                    <input class="SearchArea" value="Введите название"/>
-                    <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
+                    <!--<input class="SearchArea" value="Введите название"/>
+                    <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>-->
                     @{
-                        foreach(var cat in Model.Item4)
+                        foreach(var shop in Model.Item4)
                         {
                             <div style="display: flex; flex-direction: row; gap: 10px; padding: 10px">
-                                <input type="checkbox" id="@Html.DisplayFor(category => cat.Name)"/>
-                                <div style="color: #808080; font-size: 20px; font-weight: 600;">@Html.DisplayFor(category => cat.Name)</div>
+                                <input type="checkbox" Class="ShopCheckBox" id="@Html.DisplayFor(shops => shop.Name)Checker"/>
+                                <div style="color: #4E4E50; font-size: 20px; font-weight: 600;">@Html.DisplayFor(shops => shop.Name)</div>
                             </div>
                         }
                     }
+                    <button class="ApplyButton">
+                    <div>Применить</div>
+                    </button>
                 </div>
                 <div>
                     <div style="display: flex; flex-direction: column; gap: 10px; padding: 10px; border: 1px solid #D6DCE0; width: 250px; height: fit-content; border-radius: 5px; background: white">
-                        <a href="~/discounts/"><div  class="ListCategoryName">Все товары</div></a>
+                        <a href="Все товары" class="aNewCategory"><div  class="ListCategoryName">Все товары</div></a>
                         <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
                         @foreach(var cat in Model.Item3)
                         {
-                            <a href="~/discounts/@Html.DisplayFor(category => cat.Name)"><div class="ListCategoryName">@Html.DisplayFor(category => cat.Name)</div></a>
-                            <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
+                            <div style="display: flex; flex-direction:row; justify-content: space-between">
+                                <a href="@Html.DisplayFor(category => cat.Name)" style="align-self: center" class="aNewCategory"><div class="ListCategoryName">@Html.DisplayFor(category => cat.Name)</div></a>
+                                <div style="color: #1A1A1D; align-self: center; display: flex; align-content: center" id="@Html.DisplayName(@cat.Name.Replace(" ",""))ListOpener"><img src="~/images/ArrowForLists.svg" class="ArrowForList"/></div>
+                            </div>
+                            <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px; margin-bottom:-5px"></div>
+                            <div style="gap: 5px; flex-direction: column;" class="DisplayFlex" id="@Html.DisplayName(cat.Name.Replace(" ",""))Subcategories">
+                                @{
+                                    using (SkidElContext context = new SkidElContext())
+                                    {
+                                        List<Subcategory> subcategories = context.Subcategories.Where(x => x.CategorieId == cat.Id).ToList();
+                                        foreach (var subc in subcategories)
+                                        {
+                                            <a href="@Html.DisplayFor(category => cat.Name)&@Html.DisplayName(@subc.Name.Replace(" ",""))" class="aNewSubcategory"><div class="ListSubcategorieName">@subc.Name</div></a>
+                                            <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
+                                        }
+                                    }
+                                }
+                            </div>
                         }
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="list" id="list_1">
+            <span data-scroll="0" style="align-self: center" id="test"><img src="~/images/ArrowLeft.svg" class="ListArrow"></span>
+            <ul class="PageCounterContainer">
+                @for(int i = 1; i<=Model.Item5; i++)
+                    {
+                        <li>
+                            <a href="@i" class="PageLinks"><div class="PageCounter">@i</div></a>
+                        </li>
+                    }
+            </ul>
+            <span data-scroll="1" style="align-self: center"><img src="~/images/ArrowRight.svg" class="ListArrow"/></span>
         </div>
     </div>
 }

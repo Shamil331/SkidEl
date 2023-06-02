@@ -28,7 +28,7 @@ namespace SkidEl
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Host=localhost;Database=SkidEl;Username=postgres;Password=Shamil25");
+                optionsBuilder.UseNpgsql("Host=localhost; Database=SkidEl; Username=postgres; Password=Shamil25");
             }
         }
 
@@ -53,15 +53,18 @@ namespace SkidEl
             {
                 entity.ToTable("discounts");
 
+                entity.HasIndex(e => e.Link, "uniq_link")
+                    .IsUnique();
+
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .UseIdentityAlwaysColumn();
 
                 entity.Property(e => e.Description).HasColumnName("description");
 
-                entity.Property(e => e.EndDate)
-                    .HasColumnType("date")
-                    .HasColumnName("end_date");
+                entity.Property(e => e.Link)
+                    .IsRequired()
+                    .HasColumnName("link");
 
                 entity.Property(e => e.Name).HasColumnName("name");
 
@@ -70,10 +73,6 @@ namespace SkidEl
                 entity.Property(e => e.PreviousPrice).HasColumnName("previous_price");
 
                 entity.Property(e => e.ShopId).HasColumnName("shop_id");
-
-                entity.Property(e => e.StartDate)
-                    .HasColumnType("date")
-                    .HasColumnName("start_date");
 
                 entity.Property(e => e.SubcategoryId).HasColumnName("subcategory_id");
 
@@ -92,18 +91,19 @@ namespace SkidEl
             {
                 entity.ToTable("discount_images");
 
+                entity.HasIndex(e => e.DiscountLink, "fki_fk_discountsdiscount_images");
+
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .UseIdentityAlwaysColumn();
 
-                entity.Property(e => e.DiscountId).HasColumnName("discount_id");
-
                 entity.Property(e => e.ImageUrl).HasColumnName("image_url");
 
-                entity.HasOne(d => d.Discount)
+                entity.HasOne(d => d.DiscountLinkNavigation)
                     .WithMany(p => p.DiscountImages)
-                    .HasForeignKey(d => d.DiscountId)
-                    .HasConstraintName("fk_discountdiscount_images");
+                    .HasPrincipalKey(p => p.Link)
+                    .HasForeignKey(d => d.DiscountLink)
+                    .HasConstraintName("fk_discountsdiscount_images");
             });
 
             modelBuilder.Entity<Shop>(entity =>

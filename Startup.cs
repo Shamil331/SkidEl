@@ -28,7 +28,7 @@ namespace SkidEl
             //});
             services.AddDbContext<SkidElContext>();
             services.AddControllersWithViews();
-            
+            //services.AddMvc(options => options.EnableEndpointRouting = false);
             //JsonSerializer
             //services.AddControllersWithViews().AddNewtonsoftJson(options=>
             //options.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore)
@@ -68,12 +68,15 @@ namespace SkidEl
             //});
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name: "main",
-                    pattern: "sale/{*product}",
+                endpoints.MapControllerRoute(name: "Main",
+                    pattern: "main",
                     defaults: new { controller = "SkidEl", action = "MainPage" });
+                //endpoints.MapControllerRoute(name: "discounts",
+                //    pattern: "discounts/{category}/{page}",
+                //    defaults: new { controller = "SkidEl", action = "DiscountsListPage" });
                 endpoints.MapControllerRoute(name: "discounts",
-                    pattern: "discounts/{*category}",
-                    defaults: new {controller = "SkidEl", action = "DiscountsListPage" });
+                    pattern: "discounts",
+                    defaults: new { controller = "SkidEl", action = "DiscountsListPage" });
                 endpoints.MapControllerRoute(name: "discounts",
                     pattern: "discount/{_discount}",
                     defaults: new { controller = "SkidEl", action = "DiscountPage" });
@@ -81,6 +84,18 @@ namespace SkidEl
                     name: "default",
                     pattern: "{controller=SkidEl}/{action=MainPage}");
             });
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller=SkidEl}/{action=MainPage}");
+            //    routes.MapRoute(
+            //        name: "main",
+            //        template: "{controller=SkidEl}/{action=MainPage}/sale/{*product}");
+            //    routes.MapRoute(
+            //        name: "discount",
+            //        template: "{controller=SkidEl}/{action=DiscountsListPage}/discounts/{*category}/{*page}");
+            //});
 
         }
     }

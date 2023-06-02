@@ -4,7 +4,7 @@
     align-items: center;
     flex: none;
 }
-div{
+div {
     font-family: Inter;
     font-weight: 600;
     line-height: 30px;
@@ -46,7 +46,7 @@ button {
     padding: 0px 0px 0px 10px;
     gap: 5px;
     background: white;
-    border: 2px solid #808080;
+    border: 2px solid #4E4E50;
     box-shadow: inset 0px 4px 4px rgba(0,0,0,0.25);
     border-radius: 25px;
     width: 375px;
@@ -59,11 +59,11 @@ button {
     font-family: Inter;
     font-weight: 400;
     background: unset;
-    width:85%;
-    height:100%;
+    width: 85%;
+    height: 100%;
     font-size: 20px;
     line-height: 30px;
-    color: #808080;
+    color: #4E4E50;
     resize: none;
     border-width: 0;
     overflow-wrap: unset;
@@ -90,27 +90,28 @@ a:any-link {
 .DiscountTitleLink {
     line-height:25px;
 }
-.DiscountTitleLink:hover{
-    color: #fa2939;
-    transition-duration: 300ms;
-}
+    .DiscountTitleLink:hover {
+        /*color: #4E4E50;*/
+        opacity: 40%;
+        transition-duration: 300ms;
+    }
 .BackButton {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 13px 18px;
-    background: #EF003C;
+    background: #4E4E50;
     border-radius: 5px;
     font-size: 20px;
     align-self: flex-start;
     border: none;
 }
-.BackButton:hover {
-    background-color: white;
-    color: #EF003C;
-    transition-duration: 500ms;
-    cursor:  pointer;
-}
+    .BackButton:hover {
+        background-color: white;
+        color: #4E4E50;
+        transition-duration: 500ms;
+        cursor: pointer;
+    }
 .Cursor-pointer{
     cursor: pointer;
 }

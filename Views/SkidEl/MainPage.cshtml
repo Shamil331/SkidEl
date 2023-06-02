@@ -11,7 +11,7 @@
             @{
                 foreach (var item in Model.Item1)
                 {
-                    <a href="/discounts/@Html.DisplayFor(modelitem => item.Name)">
+                    <a href="/discounts?Category=@Html.DisplayFor(modelitem => item.Name)&Page=1">
                         <div style="display: flex; flex-direction: column; gap: 10px; background: unset; justify-content: center; align-items: center;">
                             <div style="border-radius: 100%; background: white; height: 125px; width: 125px; display: flex; flex-direction: unset; justify-content: center; align-items: center;">
                                 <img src="@Html.DisplayFor(modelitem => item.Description)" onerror="https://imgholder.ru/100X100/FFFFFF/EF003C&text=SkidEl&font=bebas" style="height: 75%"/>
@@ -40,7 +40,7 @@
                 }
             }
         </div>
-        <a href="/discounts">
+        <a href="/discounts?Category=Все товары&Page=1">
             <button class="ShowMoreButton">Показать ещё</button>
         </a>
     </div>

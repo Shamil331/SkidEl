@@ -2,7 +2,7 @@
 ul.mouseenter(function () {
     let ulElementsCount = $('ul li').length;
     let width = 5 * 85;
-    $(this).css('width', 500);
+    $(this).css('width', width);
     let rowsCount = parseInt(ulElementsCount / 5);
     if (rowsCount == 0) {
         rowsCount++;

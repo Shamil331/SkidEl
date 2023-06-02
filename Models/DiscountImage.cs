@@ -8,9 +8,9 @@ namespace SkidEl
     public partial class DiscountImage
     {
         public int Id { get; set; }
-        public int? DiscountId { get; set; }
         public string ImageUrl { get; set; }
+        public string DiscountLink { get; set; }
 
-        public virtual Discount Discount { get; set; }
+        public virtual Discount DiscountLinkNavigation { get; set; }
     }
 }

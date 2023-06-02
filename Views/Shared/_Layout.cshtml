@@ -8,30 +8,30 @@
     <link rel="stylesheet" href="~/css/InterParams.css"/>
     <link rel="stylesheet" href="~/css/Layout.css"/>
 </head>
-<body style="background: #D9D9D9">
+<body style="background: white">
     <header>
-        <div class="Containers" style="gap:75px; padding: 5px 20px 5px 55px;background:#00EF0E; border-radius:35px">
-        <a href="~/sale" style="padding-top: 10px"><img src="~/images/Logo.svg" style="width: 119px; transform: rotate(-2deg); filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25)); order:0; margin-bottom: 2px"/></a>
+        <div class="Containers" style="gap:75px; padding: 5px 20px 5px 55px;background:#4E4E50; border-radius:35px; height: 70px">
+        <a href="~/main" style="padding-top: 10px"><img src="~/images/Logo.svg" style="width: 119px; transform: rotate(-2deg); filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.25)); order:0; margin-bottom: 2px"/></a>
         <div style="display: flex; flex-direction: row; gap: 30px; order: 1; align-items: center">
-            <a href="~/discounts/Смартфоны и гаджеты">
+            <a href="~/discounts?Category=Смартфоны и гаджеты&Page=1">
                 <div class="Containers HeaderCategoriesContainers" style="order:0">
                     <img src="~/images/SmartphoneIcon.svg" style="margin-bottom: -8px"/>
                     <div class="FooterAndHeaderText">Смартфоны</div>
                 </div>
             </a>
-            <a href="~/discounts/Ноутбуки и компьютеры">
+            <a href="~/discounts?Category=Ноутбуки и компьютеры&Page=1">
                 <div class="Containers HeaderCategoriesContainers" style="order:1">
                     <img src="~/images/LaptopIcon.svg" style="margin-bottom: -8px"/>
                     <div class="FooterAndHeaderText">Ноутбуки</div>
                 </div>
             </a>
-            <a href="~/discounts/Телевизоры и цифровое ТВ">
+            <a href="~/discounts?Category=Телевизоры и цифровое ТВ&Page=1">
                 <div class="Containers HeaderCategoriesContainers" style="order:2">
                     <img src="~/images/TVIcon.svg" style="margin-bottom: -8px"/>
                     <div class="FooterAndHeaderText">Телевизоры</div>
                 </div>
             </a>
-            <a href="~/discounts">
+            <a href="~/discounts?Category=Все товары&Page=1">
                 <div class="Containers HeaderCategoriesContainers" style="order:3">
                     <img src="~/images/CatalogIcon.svg" style="margin-bottom: -8px"/>
                     <div class="FooterAndHeaderText">Каталог</div>
@@ -48,14 +48,33 @@
         @RenderBody()
     </div>
     <footer>
-        <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 40px 100px; gap: 15px; background: #EF003C; border-radius: 25px">
+        <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 40px 100px; gap: 15px; background: #4E4E50; border-radius: 25px">
         <img src="../../Images/Logo.svg" style="width: 140px"/>
         <div style="border: 1px solid white; width: 100%; border-radius: 50px"></div>
         <div style="display: flex; flex-direction: row; gap: 50px">
-            <div class="FooterAndHeaderText">Техника</div>
-            <div class="FooterAndHeaderText">Магазины</div>
-            <div class="FooterAndHeaderText">Бренды</div>
-            <div class="FooterAndHeaderText">Акции</div>
+                @{
+                    SkidEl.SkidElContext _context = new SkidEl.SkidElContext();
+                    int DiscountsCount()
+                    {
+                        return _context.Discounts.Count();
+                    }
+                    int ShopsCount()
+                    {
+                        return _context.Shops.Count();
+                    }
+                    int CategoriesCount()
+                    {
+                        return _context.Categories.Count();
+                    }
+                    int SubcategoriesCount()
+                    {
+                        return _context.Subcategories.Count();
+                    }
+            <div class="FooterAndHeaderText">Акции @DiscountsCount()</div>
+            <div class="FooterAndHeaderText">Магазины @ShopsCount()</div>
+            <div class="FooterAndHeaderText">Категории @CategoriesCount()</div>
+            <div class="FooterAndHeaderText">Подкатегории @SubcategoriesCount()</div>
+            }
         </div>
     </div>
     </footer>

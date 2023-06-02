@@ -6,6 +6,7 @@
     justify-items: center;
     align-items: start;
     grid-template-columns: repeat(4, auto);
+    width: 950px;
 }
 
 #BlocksContainer {
@@ -15,9 +16,10 @@
     gap: 30px;
     padding: 10px 0px;
     flex-direction: column;
-    background: #0249FF;
+    background: #1A1A1D;
     border-radius: 25px;
 }
+
 .SearchArea {
     font-family: Inter;
     font-weight: 400;
@@ -31,11 +33,108 @@
     border-width: 0;
     overflow-wrap: unset;
 }
+
 .SearchArea:focus-visible {
     outline-width: 0px;
 }
+
 .ListCategoryName {
-    color: #808080;
+    color: #4E4E50;
     font-size: 18px;
     font-weight: 600
+}
+.ListSubcategorieName {
+    color: #4E4E50;
+    font-size: 15px;
+    font-weight: 600;
+    align-self: end;
+}
+
+.PageCounter {
+    padding: 2px 12px;
+    color: white;
+    font-family: Inter;
+    font-weight: bold;
+    font-size: 17px;
+    border-radius: 3px;
+}
+
+.PageCounterActive {
+    border: 1px solid white;
+}
+
+.PageCounterNotActive:hover {
+    background: #4E4E50;
+    transition-duration: 500ms;
+    cursor: pointer;
+}
+
+.PageCounterContainer {
+    display: flex;
+    list-style: none;
+    max-width: calc(100%-76px);
+    overflow: hidden;
+    flex-direction: row;
+    gap: 10px;
+    padding: 0 10px 0 10px;
+}
+.PageCounterContainer li{
+    list-style-type: none;
+}
+.list{
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    width: 500px;
+    gap: 10px;
+    justify-content: center;
+}
+
+.list>[data-scroll]{
+    display: flex;
+    align-items: center;
+    -webkit-user-select: none;
+}
+
+.ListArrow {
+    height: 35px;
+    width: 35px;
+    filter: brightness(0) invert(1);
+}
+
+.ListArrow:hover{
+    opacity: 50%;
+}
+
+.DisplayNone {
+    display: none;
+}
+
+.DisplayFlex {
+    display: flex;
+}
+
+.ApplyButton {
+    align-content: center;
+    justify-content: center;
+    background: #4E4E50;
+    border-radius: 7px;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+    .ApplyButton:hover {
+        background: #C3073F;
+        opacity: 0.8;
+    }
+
+.ArrowForList{
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.ArrowForListForwardToUp{
+    transform: rotate(180deg);
 }
