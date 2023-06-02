@@ -16,7 +16,7 @@
     gap: 30px;
     padding: 10px 0px;
     flex-direction: column;
-    background: #0249FF;
+    background: #1A1A1D;
     border-radius: 25px;
 }
 
@@ -39,12 +39,12 @@
 }
 
 .ListCategoryName {
-    color: #808080;
+    color: #4E4E50;
     font-size: 18px;
     font-weight: 600
 }
 .ListSubcategorieName {
-    color: gray;
+    color: #4E4E50;
     font-size: 15px;
     font-weight: 600;
     align-self: end;
@@ -64,7 +64,7 @@
 }
 
 .PageCounterNotActive:hover {
-    background: #BBBBBB;
+    background: #4E4E50;
     transition-duration: 500ms;
     cursor: pointer;
 }
@@ -98,7 +98,8 @@
 
 .ListArrow {
     height: 35px;
-    width: 35px
+    width: 35px;
+    filter: brightness(0) invert(1);
 }
 
 .ListArrow:hover{
@@ -116,16 +117,16 @@
 .ApplyButton {
     align-content: center;
     justify-content: center;
-    background: #0249FF;
+    background: #4E4E50;
     border-radius: 7px;
     cursor: pointer;
     opacity: 0.9;
 }
 
-.ApplyButton:hover {
-    background: #EF003C;
-    opacity: 0.8;
-}
+    .ApplyButton:hover {
+        background: #C3073F;
+        opacity: 0.8;
+    }
 
 .ArrowForList{
     height: 15px;

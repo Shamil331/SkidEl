@@ -41,7 +41,7 @@ $(function () {
     })
     $(".ListCategoryName").each(function () {
         if ($(this).text() == $(".CategoryTitle").text()) {
-            $(this).css('color', '#EF003C');
+            $(this).css('color', '#C3073F');
         }
         var CurrentCategoryOpener = $(this).text();
         CurrentCategoryOpener = CurrentCategoryOpener.replace(/\s/g, "");
@@ -53,7 +53,7 @@ $(function () {
     })
     $(".ListSubcategorieName").each(function () {
         if ($(this).text() == $(".CategoryTitle").text()) {
-            $(this).css('color', '#EF003C');
+            $(this).css('color', '#C3073F');
         }
     })
     var PageNumber = FullUrl.searchParams.get('Page');

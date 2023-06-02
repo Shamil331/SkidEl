@@ -5,7 +5,7 @@
     padding: 30px 50px;
     align-items: center;
     justify-content: center;
-    background: #0249FF;
+    background: #1A1A1D;
     border-radius: 25px;
 }
 .DiscountImageSmallContainer {
@@ -61,5 +61,7 @@
     color: white;
 }
 .ProductLink:hover {
-    color: #EF003C;
+    /*color: #EF003C;*/
+    opacity: 40%;
+    transition: 0.4s;
 }

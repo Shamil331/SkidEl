@@ -25,21 +25,21 @@
     gap: 30px;
     padding: 10px 0px;
     flex-direction: column;
-    background: #0249FF;
+    background: #1A1A1D;
     border-radius: 25px;
 }
 .ShowMoreButton {
     border-radius: 5px;
     display: flex;
-    background-color: #EF003C;
+    background-color: #4E4E50;
     justify-items: center;
     align-items: center;
     font-size: 20px;
     padding: 15px 17px;
 }
-.ShowMoreButton:hover{
-    background-color: white;
-    color: #EF003C;
-    transition-duration: 500ms;
-    cursor: pointer;
-}
+    .ShowMoreButton:hover {
+        background-color: white;
+        color: #4E4E50;
+        transition-duration: 500ms;
+        cursor: pointer;
+    }

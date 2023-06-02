@@ -21,7 +21,9 @@ namespace SkidEl.Controllers
         {
             List<Category> categories = _context.Categories.ToList();
             List<Discount> discounts = _context.Discounts.ToList();
-            discounts = discounts.OrderByDescending(x => 1 - (x.NowPrice / x.PreviousPrice)).Take(20).ToList();
+            //discounts = discounts.OrderBy(x => 1 - (x.NowPrice / x.PreviousPrice)).ToList();
+            discounts = discounts.OrderBy(x => (Convert.ToDouble(x.NowPrice) / Convert.ToDouble(x.PreviousPrice))).ToList();
+            discounts = discounts.Take(20).ToList();
             discounts.ForEach(i => i.DiscountImages.Union(_context.DiscountImages.Where(t => t.DiscountLink == i.Link)).ToList());
             Dictionary<Discount, string> DiscountsAndImages = new Dictionary<Discount, string>();
             foreach (var i in discounts)
