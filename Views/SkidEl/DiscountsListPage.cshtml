@@ -2,7 +2,6 @@
 
 @using SkidEl;
 @model Tuple<Dictionary<Discount, string>, string, List<Category>, List<Shop>, int>
-@*@model IEnumerable<SkidEl.Category>*@
 @{
     ViewBag.Title = "Discounts";
     Layout = "/Views/Shared/_Layout.cshtml";
@@ -39,8 +38,6 @@
                 <div style="display: flex; flex-direction: column; gap: 10px; padding: 10px; border: 1px solid #D6DCE0; width: 250px; height: fit-content; border-radius: 5px; background: white">
                     <div style="color: #C3073F; font-size: 20px; font-weight: 600">Магазины</div>
                     <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>
-                    <!--<input class="SearchArea" value="Введите название"/>
-                    <div style="border: 1px solid #D6DCE0; width: 100%; border-radius: 0px"></div>-->
                     @{
                         foreach(var shop in Model.Item4)
                         {

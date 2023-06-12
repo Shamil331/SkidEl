@@ -12,7 +12,6 @@ namespace SkidEl.Controllers
     {
         public readonly SkidElContext _context;
 
-        // GET: MainPage
         public SkidElController(SkidElContext SkidElcontext)
         {
             _context = SkidElcontext;
@@ -21,7 +20,6 @@ namespace SkidEl.Controllers
         {
             List<Category> categories = _context.Categories.ToList();
             List<Discount> discounts = _context.Discounts.ToList();
-            //discounts = discounts.OrderBy(x => 1 - (x.NowPrice / x.PreviousPrice)).ToList();
             discounts = discounts.OrderBy(x => (Convert.ToDouble(x.NowPrice) / Convert.ToDouble(x.PreviousPrice))).ToList();
             discounts = discounts.Take(20).ToList();
             discounts.ForEach(i => i.DiscountImages.Union(_context.DiscountImages.Where(t => t.DiscountLink == i.Link)).ToList());
