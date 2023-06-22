@@ -20,7 +20,7 @@ namespace SkidEl.Controllers
         {
             List<Category> categories = _context.Categories.ToList();
             List<Discount> discounts = _context.Discounts.ToList();
-            discounts = discounts.OrderBy(x => (Convert.ToDouble(x.NowPrice) / Convert.ToDouble(x.PreviousPrice))).ToList();
+            discounts = discounts.Where(x => x.ShopId!=3).OrderBy(x => (Convert.ToDouble(x.NowPrice) / Convert.ToDouble(x.PreviousPrice))).ToList();
             discounts = discounts.Take(20).ToList();
             discounts.ForEach(i => i.DiscountImages.Union(_context.DiscountImages.Where(t => t.DiscountLink == i.Link)).ToList());
             Dictionary<Discount, string> DiscountsAndImages = new Dictionary<Discount, string>();
@@ -105,7 +105,7 @@ namespace SkidEl.Controllers
                 DiscountsAndImages.Add(i, CurrentDiscountImageUrl);
             }
             if (discounts.Count == 0) TitleToReturn = $"По запросу '{Search}' ничего не найдено";
-            var tuple = new Tuple<Dictionary<Discount, string>, string, List<Category>, List<Shop>, int>(DiscountsAndImages, TitleToReturn, _context.Categories.ToList(), _context.Shops.ToList(), PagesCount);
+            var tuple = new Tuple<Dictionary<Discount, string>, string, List<Category>, List<Shop>, int>(DiscountsAndImages, TitleToReturn, _context.Categories.ToList(), _context.Shops.Where(x=>x.Name!="Eldorado").ToList(), PagesCount);
             return View(tuple);
         }
     }
